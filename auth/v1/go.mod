@@ -1,4 +1,4 @@
-module gitlab.authkit.com/authkit/auth-api/auth/v0
+module gitlab.authkit.com/authkit/auth-api/auth/v1
 
 go 1.17
 

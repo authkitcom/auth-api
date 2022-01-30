@@ -8,7 +8,7 @@ import (
 )
 
 //go:generate go build
-//go:generate ./v0
+//go:generate ./v1
 
 type ServiceOperationTemplate struct {
 	ProtoTemplate     string
@@ -39,7 +39,7 @@ type ServiceInput struct {
 var operationTemplates = map[string]*ServiceOperationTemplate{
 	"Associate": {
 		ProtoTemplate: `
-  rpc Associate{{ .Params.Field  }}sTo{{ .Input.Name }} (Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Request) returns (google.protobuf.Empty) {
+  rpc Associate{{ .Params.Field  }}sTo{{ .Input.Name }} (Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Request) returns (Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Response) {
     option (google.api.http) = {
       put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
       body: "{{ .Params.ParamName }}"
@@ -67,6 +67,10 @@ message Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Request {
   string realm_scope = 4;
 {{- end }}
 }
+
+message Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Response {
+}
+
 message {{ .Input.Name }}{{ .Params.Field }}Association {
   repeated string set = 1;
   repeated string remove = 2;
@@ -94,24 +98,25 @@ message {{ .Input.Name }}{{ .Params.Field }}Association {
 		ProtoTypeTemplate: `
 message List{{ .Params.Field  }}sBy{{ .Input.Name }}Request {
   string sorting = 1;
-  auth.v0.PageParams paging = 2;
+  auth.v1.PageParams paging = 2;
   string {{ .Input.Resource }} = 3;
 {{- if .Input.TenantScoped }}
-  string tenantScope = 4;
+  string tenant_scope = 4;
 {{- end }}
 {{- if .Input.RealmScoped }}
-  string realmScope = 5;
+  string realm_scope = 5;
 {{- end }}
 }
+
 message List{{ .Params.Field  }}sBy{{ .Input.Name }}Response {
-  auth.v0.PageInfo pageInfo = 1;
+  auth.v1.PageInfo page_info = 1;
   repeated {{ .Params.Type }} list = 2;
 }
 		`,
 	},
 	"Find": {
 		ProtoTemplate: `
-  rpc Get{{ .Input.Name }}(Get{{ .Input.Name }}Request) returns ({{ .Input.Type }}) {
+  rpc Get{{ .Input.Name }}(Get{{ .Input.Name }}Request) returns (Get{{ .Input.Name }}Response) {
     option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}" };
   }
 `,
@@ -119,17 +124,21 @@ message List{{ .Params.Field  }}sBy{{ .Input.Name }}Response {
 message Get{{ .Input.Name }}Request {
   string {{ .Input.Resource }} = 1;
 {{- if .Input.TenantScoped }}
-  string tenantScope = 2;
+  string tenant_scope = 2;
 {{- end }}
 {{- if .Input.RealmScoped }}
-  string realmScope = 3;
+  string realm_scope = 3;
 {{- end }}
+}
+
+message Get{{ .Input.Name }}Response {
+  {{ .Input.Type }} {{ .Input.Resource }} = 1;
 }
 `,
 	},
 	"CreateUpdateDelete": {
 		ProtoTemplate: `
-  rpc Create{{ .Input.Name }}(Create{{ .Input.Name }}Request) returns ({{ .Input.Type }}) {
+  rpc Create{{ .Input.Name }}(Create{{ .Input.Name }}Request) returns (Create{{ .Input.Name }}Response) {
     option (google.api.http) = {
       post: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s"
       body: "{{ .Input.Resource }}"
@@ -145,9 +154,11 @@ message Get{{ .Input.Name }}Request {
 	  }
 	};
   }
-  rpc Update{{ .Input.Name }}(Update{{ .Input.Name }}Request) returns ({{ .Input.Type }}) {
+
+  rpc Update{{ .Input.Name }}(Update{{ .Input.Name }}Request) returns (Update{{ .Input.Name }}Response) {
     option (google.api.http) = {
-      put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{id}"
+      put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{ 
+{{- .Input.Resource }}.id}"
       body: "{{ .Input.Resource }}"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -161,7 +172,8 @@ message Get{{ .Input.Name }}Request {
 	  }
 	};
   }
-  rpc Delete{{ .Input.Name }}(Delete{{ .Input.Name }}Request) returns (google.protobuf.Empty) {
+
+  rpc Delete{{ .Input.Name }}(Delete{{ .Input.Name }}Request) returns (Delete{{ .Input.Name }}Response) {
     option (google.api.http) = { delete: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -186,15 +198,22 @@ message Create{{ .Input.Name }}Request {
 {{- end }}
 }
 
+message Create{{ .Input.Name }}Response {
+  {{ .Input.Type }} {{ .Input.Resource }} = 1;
+}
+
 message Update{{ .Input.Name }}Request {
   {{ .Input.Type }} {{ .Input.Resource }} = 1;
-  string id = 2;
 {{- if .Input.TenantScoped }}
   string tenant_scope = 3;
 {{- end }}
 {{- if .Input.RealmScoped }}
   string realm_scope = 4;
 {{- end }}
+}
+
+message Update{{ .Input.Name }}Response {
+  {{ .Input.Type }} {{ .Input.Resource }} = 1;
 }
 
 message Delete{{ .Input.Name }}Request {
@@ -206,11 +225,15 @@ message Delete{{ .Input.Name }}Request {
   string realm_scope = 3;
 {{- end }}
 }
+
+message Delete{{ .Input.Name }}Response {
+}
+
 `,
 	},
 	"UpdateConfig": {
 		ProtoTemplate: `
-  rpc Update{{ .Input.Name }}Config(Update{{ .Input.Name }}ConfigRequest) returns (google.protobuf.Empty) {
+  rpc Update{{ .Input.Name }}Config(Update{{ .Input.Name }}ConfigRequest) returns (Update{{ .Input.Name }}ConfigResponse) {
     option (google.api.http) = {
       put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{id}/config"
       body: "config"
@@ -243,6 +266,9 @@ message Update{{ .Input.Name }}Config {
   google.protobuf.Struct set = 1;
   repeated string remove = 2;
 }
+
+message Update{{ .Input.Name }}ConfigResponse {
+}
 `,
 	},
 	"List": {
@@ -264,7 +290,7 @@ message Update{{ .Input.Name }}Config {
 		ProtoTypeTemplate: `
 message List{{ .Input.Name }}sRequest {
   string sorting = 1;
-  auth.v0.PageParams paging = 2;
+  auth.v1.PageParams paging = 2;
 {{- if .Input.TenantScoped }}
   string tenant_scope = 3;
 {{- end }}
@@ -274,7 +300,7 @@ message List{{ .Input.Name }}sRequest {
 }
 
 message List{{ .Input.Name }}sResponse {
-  auth.v0.PageInfo page_info = 1;
+  auth.v1.PageInfo page_info = 1;
   repeated {{ .Input.Type }} list = 2;
 }
 `,
@@ -284,12 +310,11 @@ message List{{ .Input.Name }}sResponse {
 var protoTemplate = `// GENERATED BY go:generate. DO NOT EDIT.
 
 syntax = "proto3";
-package auth.v0;
+package auth.v1;
 
 import "google/api/annotations.proto";
-import "auth/v0/auth.proto";
+import "auth/v1/auth.proto";
 import "google/protobuf/struct.proto";
-import "google/protobuf/empty.proto";
 import "protoc-gen-swagger/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
@@ -366,14 +391,14 @@ func main() {
 			Services: []*ServiceInput{
 				MakeServiceInput(&ServiceInput{
 					Name:     "Tenant",
-					Type:     "auth.v0.Tenant",
+					Type:     "auth.v1.Tenant",
 					Resource: "tenant",
 				}, []*ServiceOperation{
 					{Name: "List"},
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "User",
-					Type:         "auth.v0.User",
+					Type:         "auth.v1.User",
 					Resource:     "user",
 					TenantScoped: true,
 				}, []*ServiceOperation{
@@ -383,7 +408,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "UserDatabase",
-					Type:         "auth.v0.UserDatabase",
+					Type:         "auth.v1.UserDatabase",
 					Resource:     "user_database",
 					TenantScoped: true,
 				}, []*ServiceOperation{
@@ -394,7 +419,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Provider",
-					Type:         "auth.v0.Provider",
+					Type:         "auth.v1.Provider",
 					Resource:     "provider",
 					TenantScoped: true,
 				}, []*ServiceOperation{
@@ -405,7 +430,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Realm",
-					Type:         "auth.v0.Realm",
+					Type:         "auth.v1.Realm",
 					Resource:     "realm",
 					TenantScoped: true,
 				}, []*ServiceOperation{
@@ -415,7 +440,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Client",
-					Type:         "auth.v0.Client",
+					Type:         "auth.v1.Client",
 					Resource:     "client",
 					TenantScoped: true,
 					RealmScoped:  true,
@@ -426,7 +451,7 @@ func main() {
 						Name: "ListAssociation",
 						Params: map[string]interface{}{
 							"Field":     "Provider",
-							"Type":      "auth.v0.Provider",
+							"Type":      "auth.v1.Provider",
 							"Resource":  "providers",
 							"ParamName": "provider",
 						},
@@ -443,7 +468,7 @@ func main() {
 						Name: "ListAssociation",
 						Params: map[string]interface{}{
 							"Field":     "Role",
-							"Type":      "auth.v0.Role",
+							"Type":      "auth.v1.Role",
 							"Resource":  "roles",
 							"ParamName": "role",
 						},
@@ -461,7 +486,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Role",
-					Type:         "auth.v0.Role",
+					Type:         "auth.v1.Role",
 					Resource:     "role",
 					TenantScoped: true,
 					RealmScoped:  true,
@@ -472,7 +497,7 @@ func main() {
 						Name: "ListAssociation",
 						Params: map[string]interface{}{
 							"Field":     "Permission",
-							"Type":      "auth.v0.Permission",
+							"Type":      "auth.v1.Permission",
 							"Resource":  "permissions",
 							"ParamName": "permission",
 						},
@@ -489,7 +514,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Permission",
-					Type:         "auth.v0.Permission",
+					Type:         "auth.v1.Permission",
 					Resource:     "permission",
 					TenantScoped: true,
 					RealmScoped:  true,
@@ -500,7 +525,7 @@ func main() {
 				}),
 				MakeServiceInput(&ServiceInput{
 					Name:         "Scope",
-					Type:         "auth.v0.Scope",
+					Type:         "auth.v1.Scope",
 					Resource:     "scope",
 					TenantScoped: true,
 					RealmScoped:  true,
@@ -511,7 +536,7 @@ func main() {
 						Name: "ListAssociation",
 						Params: map[string]interface{}{
 							"Field":     "Permission",
-							"Type":      "auth.v0.Permission",
+							"Type":      "auth.v1.Permission",
 							"Resource":  "permissions",
 							"ParamName": "permission",
 						},
