@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package auth.v0;
+
+import "google/protobuf/struct.proto";
+
+message PageParams {
+  string first = 1;
+  string last = 2;
+  int32 count = 3;
+}
+
+message PageInfo {
+  bool has_next_page = 1;
+  bool has_prev_page = 2;
+  string start_cursor = 3;
+  string end_cursor = 4;
+}
+
+// Domain objects
+message Tenant {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string url = 4;
+  string certificate = 5;
+  string key_id = 6;
+  google.protobuf.Struct config = 7;
+}
+
+message User {
+  string id = 1;
+  string tenant_id = 2;
+  string given_name = 3;
+  string family_name = 4;
+	string middle_name = 5;
+	string nickname = 6;
+	string preferred_username = 7;
+  string email = 8;
+	bool email_verified = 9;
+	string gender = 10;
+	string phone_number = 11;
+	bool phone_number_verified = 12;
+  google.protobuf.Struct metadata = 13;
+  google.protobuf.Struct extra_fields = 14;
+}
+
+message SecuredUser {
+  string audience = 1;
+  string jti = 2;
+  User user = 3;
+}
+
+message UserDatabase {
+  string id = 1;
+  string tenant_id = 2;
+  string name = 3;
+  google.protobuf.Struct config = 4;
+}
+
+message Provider {
+  string id = 1;
+  string tenant_id = 2;
+  string name = 3;
+  string provider_type = 4;
+  google.protobuf.Struct config = 5;
+}
+
+message Realm {
+  string id = 1;
+  string tenant_id = 2;
+  string name = 3;
+  string code = 4;
+}
+
+message Client {
+  string id = 1;
+  string tenant_id = 2;
+  string realm_id = 3;
+  string user_database_id = 4;
+  string name = 5;
+  string alias = 6;
+  string grant_type = 7;
+  string secret_key_hash = 8;
+  google.protobuf.Struct config = 9;
+  google.protobuf.Struct metadata = 10;
+}
+
+message Role {
+  string id = 1;
+  string realm_id = 2;
+  string name = 3;
+  bool auto = 4;
+}
+
+message Permission {
+  string id = 1;
+  string realm_id = 2;
+  string name = 3;
+}
+
+message Scope {
+  string id = 1;
+  string realm_id = 2;
+  string name = 3;
+}
