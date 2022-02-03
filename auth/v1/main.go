@@ -41,7 +41,7 @@ var operationTemplates = map[string]*ServiceOperationTemplate{
 		ProtoTemplate: `
   rpc Associate{{ .Params.Field  }}sTo{{ .Input.Name }} (Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Request) returns (Associate{{ .Params.Field  }}sTo{{ .Input.Name }}Response) {
     option (google.api.http) = {
-      put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
+      put: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
       body: "{{ .Params.ParamName }}"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -81,7 +81,7 @@ message {{ .Input.Name }}{{ .Params.Field }}Association {
 		ProtoTemplate: `
   rpc List{{ .Params.Field  }}sBy{{ .Input.Name }} (List{{ .Params.Field  }}sBy{{ .Input.Name }}Request) returns (List{{ .Params.Field  }}sBy{{ .Input.Name }}Response) {
     option (google.api.http) = {
-	  get: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
+	  get: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -117,7 +117,7 @@ message List{{ .Params.Field  }}sBy{{ .Input.Name }}Response {
 	"Find": {
 		ProtoTemplate: `
   rpc Get{{ .Input.Name }}(Get{{ .Input.Name }}Request) returns (Get{{ .Input.Name }}Response) {
-    option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}" };
+    option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}" };
   }
 `,
 		ProtoTypeTemplate: `
@@ -140,7 +140,7 @@ message Get{{ .Input.Name }}Response {
 		ProtoTemplate: `
   rpc Create{{ .Input.Name }}(Create{{ .Input.Name }}Request) returns (Create{{ .Input.Name }}Response) {
     option (google.api.http) = {
-      post: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s"
+      post: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s"
       body: "{{ .Input.Resource }}"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -157,7 +157,7 @@ message Get{{ .Input.Name }}Response {
 
   rpc Update{{ .Input.Name }}(Update{{ .Input.Name }}Request) returns (Update{{ .Input.Name }}Response) {
     option (google.api.http) = {
-      put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{ 
+      put: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{ 
 {{- .Input.Resource }}.id}"
       body: "{{ .Input.Resource }}"
     };
@@ -174,7 +174,7 @@ message Get{{ .Input.Name }}Response {
   }
 
   rpc Delete{{ .Input.Name }}(Delete{{ .Input.Name }}Request) returns (Delete{{ .Input.Name }}Response) {
-    option (google.api.http) = { delete: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{id}" };
+    option (google.api.http) = { delete: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -235,7 +235,7 @@ message Delete{{ .Input.Name }}Response {
 		ProtoTemplate: `
   rpc Update{{ .Input.Name }}Config(Update{{ .Input.Name }}ConfigRequest) returns (Update{{ .Input.Name }}ConfigResponse) {
     option (google.api.http) = {
-      put: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s/{id}/config"
+      put: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{id}/config"
       body: "config"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -274,7 +274,7 @@ message Update{{ .Input.Name }}ConfigResponse {
 	"List": {
 		ProtoTemplate: `
   rpc List{{ .Input.Name }}s(List{{ .Input.Name }}sRequest) returns (List{{ .Input.Name }}sResponse) {
-    option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenantScope}/{{end}}{{ if .Input.RealmScoped}}{realmScope}/{{end}}{{ .Input.Resource }}s" };
+    option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
