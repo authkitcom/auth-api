@@ -44,7 +44,8 @@ var operationTemplates = map[string]*ServiceOperationTemplate{
       put: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
       body: "{{ .Params.ParamName }}"
     };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -83,7 +84,8 @@ message {{ .Input.Name }}{{ .Params.Field }}Association {
     option (google.api.http) = {
 	  get: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{{ "{" }}{{ .Input.Resource }}{{ "}" }}/{{ .Params.Resource }}"
     };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -143,7 +145,7 @@ message Get{{ .Input.Name }}Response {
       post: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s"
       body: "{{ .Input.Resource }}"
     };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -161,7 +163,7 @@ message Get{{ .Input.Name }}Response {
 {{- .Input.Resource }}.id}"
       body: "{{ .Input.Resource }}"
     };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -175,7 +177,7 @@ message Get{{ .Input.Name }}Response {
 
   rpc Delete{{ .Input.Name }}(Delete{{ .Input.Name }}Request) returns (Delete{{ .Input.Name }}Response) {
     option (google.api.http) = { delete: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{id}" };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -238,7 +240,7 @@ message Delete{{ .Input.Name }}Response {
       put: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s/{id}/config"
       body: "config"
     };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -275,7 +277,7 @@ message Update{{ .Input.Name }}ConfigResponse {
 		ProtoTemplate: `
   rpc List{{ .Input.Name }}s(List{{ .Input.Name }}sRequest) returns (List{{ .Input.Name }}sResponse) {
     option (google.api.http) = { get: "/v1/{{ if .Input.TenantScoped}}{tenant_scope}/{{end}}{{ if .Input.RealmScoped}}{realm_scope}/{{end}}{{ .Input.Resource }}s" };
-    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
 		  key: "OAuth2";
@@ -315,9 +317,9 @@ package auth.v1;
 import "google/api/annotations.proto";
 import "auth/v1/auth.proto";
 import "google/protobuf/struct.proto";
-import "protoc-gen-swagger/options/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	info: {
 		title: "AuthKit API";
 		version: "0.1";
