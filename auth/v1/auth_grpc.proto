@@ -63,12 +63,12 @@ service AuthKitAuthService {
 
   
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/users/{user}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/users/{user}" };
   }
 
   
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/users" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/users" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -84,7 +84,7 @@ service AuthKitAuthService {
   
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/users"
+      post: "/v1/{tenant_scope}/users"
       body: "user"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -101,7 +101,7 @@ service AuthKitAuthService {
 
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/users/{user.id}"
+      put: "/v1/{tenant_scope}/users/{user.id}"
       body: "user"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -117,7 +117,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/users/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/users/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -132,12 +132,12 @@ service AuthKitAuthService {
 
   
   rpc GetUserDatabase(GetUserDatabaseRequest) returns (GetUserDatabaseResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/user_databases/{user_database}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/user_databases/{user_database}" };
   }
 
   
   rpc ListUserDatabases(ListUserDatabasesRequest) returns (ListUserDatabasesResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/user_databases" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/user_databases" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -153,7 +153,7 @@ service AuthKitAuthService {
   
   rpc CreateUserDatabase(CreateUserDatabaseRequest) returns (CreateUserDatabaseResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/user_databases"
+      post: "/v1/{tenant_scope}/user_databases"
       body: "user_database"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -170,7 +170,7 @@ service AuthKitAuthService {
 
   rpc UpdateUserDatabase(UpdateUserDatabaseRequest) returns (UpdateUserDatabaseResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/user_databases/{user_database.id}"
+      put: "/v1/{tenant_scope}/user_databases/{user_database.id}"
       body: "user_database"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -186,7 +186,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteUserDatabase(DeleteUserDatabaseRequest) returns (DeleteUserDatabaseResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/user_databases/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/user_databases/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -202,7 +202,7 @@ service AuthKitAuthService {
   
   rpc UpdateUserDatabaseConfig(UpdateUserDatabaseConfigRequest) returns (UpdateUserDatabaseConfigResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/user_databases/{id}/config"
+      put: "/v1/{tenant_scope}/user_databases/{id}/config"
       body: "config"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -219,12 +219,12 @@ service AuthKitAuthService {
 
   
   rpc GetProvider(GetProviderRequest) returns (GetProviderResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/providers/{provider}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/providers/{provider}" };
   }
 
   
   rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/providers" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/providers" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -240,7 +240,7 @@ service AuthKitAuthService {
   
   rpc CreateProvider(CreateProviderRequest) returns (CreateProviderResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/providers"
+      post: "/v1/{tenant_scope}/providers"
       body: "provider"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -257,7 +257,7 @@ service AuthKitAuthService {
 
   rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/providers/{provider.id}"
+      put: "/v1/{tenant_scope}/providers/{provider.id}"
       body: "provider"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -273,7 +273,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteProvider(DeleteProviderRequest) returns (DeleteProviderResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/providers/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/providers/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -289,7 +289,7 @@ service AuthKitAuthService {
   
   rpc UpdateProviderConfig(UpdateProviderConfigRequest) returns (UpdateProviderConfigResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/providers/{id}/config"
+      put: "/v1/{tenant_scope}/providers/{id}/config"
       body: "config"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -306,12 +306,12 @@ service AuthKitAuthService {
 
   
   rpc GetRealm(GetRealmRequest) returns (GetRealmResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/realms/{realm}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/realms/{realm}" };
   }
 
   
   rpc ListRealms(ListRealmsRequest) returns (ListRealmsResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/realms" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/realms" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -327,7 +327,7 @@ service AuthKitAuthService {
   
   rpc CreateRealm(CreateRealmRequest) returns (CreateRealmResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/realms"
+      post: "/v1/{tenant_scope}/realms"
       body: "realm"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -344,7 +344,7 @@ service AuthKitAuthService {
 
   rpc UpdateRealm(UpdateRealmRequest) returns (UpdateRealmResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/realms/{realm.id}"
+      put: "/v1/{tenant_scope}/realms/{realm.id}"
       body: "realm"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -360,7 +360,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteRealm(DeleteRealmRequest) returns (DeleteRealmResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/realms/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/realms/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -375,12 +375,12 @@ service AuthKitAuthService {
 
   
   rpc GetClient(GetClientRequest) returns (GetClientResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/clients/{client}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/clients/{client}" };
   }
 
   
   rpc ListClients(ListClientsRequest) returns (ListClientsResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/clients" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/clients" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -396,7 +396,7 @@ service AuthKitAuthService {
   
   rpc ListProvidersByClient (ListProvidersByClientRequest) returns (ListProvidersByClientResponse) {
     option (google.api.http) = {
-	  get: "/v1/{tenantScope}/{realmScope}/clients/{client}/providers"
+	  get: "/v1/{tenant_scope}/{realm_scope}/clients/{client}/providers"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -413,7 +413,7 @@ service AuthKitAuthService {
   
   rpc AssociateProvidersToClient (AssociateProvidersToClientRequest) returns (AssociateProvidersToClientResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/clients/{client}/providers"
+      put: "/v1/{tenant_scope}/{realm_scope}/clients/{client}/providers"
       body: "provider"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -431,7 +431,7 @@ service AuthKitAuthService {
   
   rpc ListRolesByClient (ListRolesByClientRequest) returns (ListRolesByClientResponse) {
     option (google.api.http) = {
-	  get: "/v1/{tenantScope}/{realmScope}/clients/{client}/roles"
+	  get: "/v1/{tenant_scope}/{realm_scope}/clients/{client}/roles"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -448,7 +448,7 @@ service AuthKitAuthService {
   
   rpc AssociateRolesToClient (AssociateRolesToClientRequest) returns (AssociateRolesToClientResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/clients/{client}/roles"
+      put: "/v1/{tenant_scope}/{realm_scope}/clients/{client}/roles"
       body: "role"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -466,7 +466,7 @@ service AuthKitAuthService {
   
   rpc CreateClient(CreateClientRequest) returns (CreateClientResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/{realmScope}/clients"
+      post: "/v1/{tenant_scope}/{realm_scope}/clients"
       body: "client"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -483,7 +483,7 @@ service AuthKitAuthService {
 
   rpc UpdateClient(UpdateClientRequest) returns (UpdateClientResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/clients/{client.id}"
+      put: "/v1/{tenant_scope}/{realm_scope}/clients/{client.id}"
       body: "client"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -499,7 +499,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteClient(DeleteClientRequest) returns (DeleteClientResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/{realmScope}/clients/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/{realm_scope}/clients/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -515,7 +515,7 @@ service AuthKitAuthService {
   
   rpc UpdateClientConfig(UpdateClientConfigRequest) returns (UpdateClientConfigResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/clients/{id}/config"
+      put: "/v1/{tenant_scope}/{realm_scope}/clients/{id}/config"
       body: "config"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -532,12 +532,12 @@ service AuthKitAuthService {
 
   
   rpc GetRole(GetRoleRequest) returns (GetRoleResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/roles/{role}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/roles/{role}" };
   }
 
   
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/roles" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/roles" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -553,7 +553,7 @@ service AuthKitAuthService {
   
   rpc ListPermissionsByRole (ListPermissionsByRoleRequest) returns (ListPermissionsByRoleResponse) {
     option (google.api.http) = {
-	  get: "/v1/{tenantScope}/{realmScope}/roles/{role}/permissions"
+	  get: "/v1/{tenant_scope}/{realm_scope}/roles/{role}/permissions"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -570,7 +570,7 @@ service AuthKitAuthService {
   
   rpc AssociatePermissionsToRole (AssociatePermissionsToRoleRequest) returns (AssociatePermissionsToRoleResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/roles/{role}/permissions"
+      put: "/v1/{tenant_scope}/{realm_scope}/roles/{role}/permissions"
       body: "permission"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -588,7 +588,7 @@ service AuthKitAuthService {
   
   rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/{realmScope}/roles"
+      post: "/v1/{tenant_scope}/{realm_scope}/roles"
       body: "role"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -605,7 +605,7 @@ service AuthKitAuthService {
 
   rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/roles/{role.id}"
+      put: "/v1/{tenant_scope}/{realm_scope}/roles/{role.id}"
       body: "role"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -621,7 +621,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/{realmScope}/roles/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/{realm_scope}/roles/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -636,12 +636,12 @@ service AuthKitAuthService {
 
   
   rpc GetPermission(GetPermissionRequest) returns (GetPermissionResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/permissions/{permission}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/permissions/{permission}" };
   }
 
   
   rpc ListPermissions(ListPermissionsRequest) returns (ListPermissionsResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/permissions" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/permissions" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -657,7 +657,7 @@ service AuthKitAuthService {
   
   rpc CreatePermission(CreatePermissionRequest) returns (CreatePermissionResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/{realmScope}/permissions"
+      post: "/v1/{tenant_scope}/{realm_scope}/permissions"
       body: "permission"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -674,7 +674,7 @@ service AuthKitAuthService {
 
   rpc UpdatePermission(UpdatePermissionRequest) returns (UpdatePermissionResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/permissions/{permission.id}"
+      put: "/v1/{tenant_scope}/{realm_scope}/permissions/{permission.id}"
       body: "permission"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -690,7 +690,7 @@ service AuthKitAuthService {
   }
 
   rpc DeletePermission(DeletePermissionRequest) returns (DeletePermissionResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/{realmScope}/permissions/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/{realm_scope}/permissions/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -705,12 +705,12 @@ service AuthKitAuthService {
 
   
   rpc GetScope(GetScopeRequest) returns (GetScopeResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/scopes/{scope}" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/scopes/{scope}" };
   }
 
   
   rpc ListScopes(ListScopesRequest) returns (ListScopesResponse) {
-    option (google.api.http) = { get: "/v1/{tenantScope}/{realmScope}/scopes" };
+    option (google.api.http) = { get: "/v1/{tenant_scope}/{realm_scope}/scopes" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {
@@ -726,7 +726,7 @@ service AuthKitAuthService {
   
   rpc ListPermissionsByScope (ListPermissionsByScopeRequest) returns (ListPermissionsByScopeResponse) {
     option (google.api.http) = {
-	  get: "/v1/{tenantScope}/{realmScope}/scopes/{scope}/permissions"
+	  get: "/v1/{tenant_scope}/{realm_scope}/scopes/{scope}/permissions"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
@@ -743,7 +743,7 @@ service AuthKitAuthService {
   
   rpc AssociatePermissionsToScope (AssociatePermissionsToScopeRequest) returns (AssociatePermissionsToScopeResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/scopes/{scope}/permissions"
+      put: "/v1/{tenant_scope}/{realm_scope}/scopes/{scope}/permissions"
       body: "permission"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -761,7 +761,7 @@ service AuthKitAuthService {
   
   rpc CreateScope(CreateScopeRequest) returns (CreateScopeResponse) {
     option (google.api.http) = {
-      post: "/v1/{tenantScope}/{realmScope}/scopes"
+      post: "/v1/{tenant_scope}/{realm_scope}/scopes"
       body: "scope"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -778,7 +778,7 @@ service AuthKitAuthService {
 
   rpc UpdateScope(UpdateScopeRequest) returns (UpdateScopeResponse) {
     option (google.api.http) = {
-      put: "/v1/{tenantScope}/{realmScope}/scopes/{scope.id}"
+      put: "/v1/{tenant_scope}/{realm_scope}/scopes/{scope.id}"
       body: "scope"
     };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
@@ -794,7 +794,7 @@ service AuthKitAuthService {
   }
 
   rpc DeleteScope(DeleteScopeRequest) returns (DeleteScopeResponse) {
-    option (google.api.http) = { delete: "/v1/{tenantScope}/{realmScope}/scopes/{id}" };
+    option (google.api.http) = { delete: "/v1/{tenant_scope}/{realm_scope}/scopes/{id}" };
     option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
 	  security: {
 	    security_requirement: {

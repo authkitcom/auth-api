@@ -2,7 +2,6 @@ version: v1
 name: buf.build/authkit/auth
 deps:
   - buf.build/googleapis/googleapis
-  - buf.build/evalsocket/protoc-gen-swagger
 lint:
   use:
     - DEFAULT
